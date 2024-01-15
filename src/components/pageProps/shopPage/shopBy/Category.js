@@ -59,7 +59,13 @@ const Category = () => {
           {items.map(({ _id, title, icons }) => (
             <li
               key={_id}
-              className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center justify-between"
+              className={`border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center justify-between ${
+                title === selectedCategory
+                  ? "font-bold text-lg underline text-black"
+                  : title === "All Products" && selectedCategory === null
+                  ? "font-bold text-lg underline text-black"
+                  : "hover:font-bold text-lg hover:underline hover:text-black"
+              } md:border-r-[2px] hoverEffect last:border-r-0`}
               onClick={() => {
                 if (title == "All Products") {
                   setCategory(null);
