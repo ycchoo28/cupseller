@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Product from "../../home/Products/Product";
 import { paginationItems } from "../../../constants";
+import { useProduct } from "../../../zustand/product";
 
 const items = paginationItems;
 function Items({ currentItems }) {
@@ -12,7 +13,9 @@ function Items({ currentItems }) {
           <div key={item._id} className="w-full">
             <Product
               _id={item._id}
+              category={item.category}
               img={item.img}
+              images={item.images}
               productName={item.productName}
               price={item.price}
               color={item.color}
@@ -26,6 +29,21 @@ function Items({ currentItems }) {
 }
 
 const Pagination = ({ itemsPerPage }) => {
+
+  const { selectedCategory, setCategory } = useProduct((state) => ({
+    selectedCategory: state.selectedCategory,
+    setCategory: state.setCategory,
+  }));
+
+  useEffect(() => {
+    console.log('selcetedaedreafCate', selectedCategory);
+  }, [selectedCategory]);
+  
+  const currentItems = items
+  .filter((item) => !selectedCategory || item.category === selectedCategory);
+  // .slice(itemOffset, endOffset);
+
+
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -36,7 +54,6 @@ const Pagination = ({ itemsPerPage }) => {
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
   //   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
   // Invoke when user click to request another page.

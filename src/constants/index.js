@@ -88,7 +88,9 @@ export const SplOfferData = [
 export const paginationItems = [
   {
     _id: 1001,
+    category: "Cup",
     img: spfOne,
+    images: [spfOne, spfTwo, spfThree],
     productName: "Cap for Boys",
     price: "35.00",
     color: "Blank and White",
@@ -97,6 +99,7 @@ export const paginationItems = [
   },
   {
     _id: 1002,
+    category: "Jumping egg",
     img: spfTwo,
     productName: "Tea Table",
     price: "180.00",
@@ -106,6 +109,7 @@ export const paginationItems = [
   },
   {
     _id: 1003,
+    category: "Lube",
     img: spfThree,
     productName: "Headphones",
     price: "25.00",
