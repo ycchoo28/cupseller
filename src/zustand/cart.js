@@ -3,6 +3,16 @@ import { create } from "zustand";
 export const useCart = create((set, get) => ({
   userInformation: [],
   shoppingCart: [],
+
+  initializeCart: () => {
+    // Check if there's any cart data in localStorage
+    const storedCart = JSON.parse(localStorage.getItem("shoppingCart"));
+
+    if (storedCart) {
+      set({ shoppingCart: storedCart });
+    }
+  },
+
   addToCart: (product) => {
     const existingProduct = get().shoppingCart.find(
       (item) => item._id === product._id
@@ -18,6 +28,9 @@ export const useCart = create((set, get) => ({
     } else {
       set((state) => ({ shoppingCart: [...state.shoppingCart, product] }));
     }
+
+    // Save the updated cart to localStorage
+    localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
   },
   increaseQuantity: (product) => {
     set((state) => ({
@@ -27,8 +40,10 @@ export const useCart = create((set, get) => ({
           : item
       ),
     }));
+
+    localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
   },
-  
+
   increaseQuantity: (product) => {
     set((state) => ({
       shoppingCart: state.shoppingCart.map((item) =>
@@ -37,6 +52,8 @@ export const useCart = create((set, get) => ({
           : item
       ),
     }));
+
+    localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
   },
 
   decreaseQuantity: (product) => {
@@ -47,16 +64,20 @@ export const useCart = create((set, get) => ({
           : item
       ),
     }));
-  },  
-  
+
+    localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
+  },
+
   deleteItem: (productId) => {
     set((state) => ({
       shoppingCart: state.shoppingCart.filter((item) => item._id !== productId),
     }));
+
+    localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
   },
 
   resetCart: () => {
     set({ shoppingCart: [] });
+    localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
   },
-  
 }));

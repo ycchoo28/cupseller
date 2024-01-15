@@ -22,6 +22,10 @@ import Offer from "./pages/Offer/Offer";
 import Payment from "./pages/payment/Payment";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
+import { useCart } from "./zustand/cart";
+
+// Initialize the cart when your application starts
+useCart.getState().initializeCart();
 
 const Layout = () => {
   return (
