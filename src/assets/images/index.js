@@ -31,6 +31,9 @@ import productOfTheYear from "./products/productOfTheYear.webp";
 import paymentCard from "./payment.png";
 import emptyCart from "../images/emptyCart.png";
 
+// YC Product
+import paria from "./products/paria.webp";
+
 export {
   logo,
   logoLight,
@@ -64,4 +67,6 @@ export {
   // ===================== Products End here ==============
   paymentCard,
   emptyCart,
+
+  paria
 };
