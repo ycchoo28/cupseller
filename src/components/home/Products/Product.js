@@ -11,14 +11,16 @@ import { addToCart } from "../../../redux/orebiSlice";
 
 const Product = (props) => {
   const dispatch = useDispatch();
-  const _id = props.productName;
+  const item = props.item;
+  console.log('itememe', item);
+  const _id = item.productName;
   const idString = (_id) => {
     return String(_id).toLowerCase().split(" ").join("");
   };
   const rootId = idString(_id);
 
   const navigate = useNavigate();
-  const productItem = props;
+  const productItem = props.item;
   const handleProductDetails = () => {
     navigate(`/product/${rootId}`, {
       state: {
@@ -30,26 +32,26 @@ const Product = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleNextImage = () => {
-    const nextIndex = (currentImageIndex + 1) % props.images.length;
+    const nextIndex = (currentImageIndex + 1) % item.images.length;
     setCurrentImageIndex(nextIndex);
   };
 
   const handlePrevImage = () => {
     const prevIndex =
-      (currentImageIndex - 1 + props.images.length) % props.images.length;
+      (currentImageIndex - 1 + item.images.length) % item.images.length;
     setCurrentImageIndex(prevIndex);
   };
   return (
     <div onClick={handleProductDetails} className="w-full relative group">
       <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
         <div>
-          <Image className="w-full h-full" imgSrc={props.img} />
+          <Image className="w-full h-full" imgSrc={item.img} />
         </div>
         {/* <div>
-          <Image className="w-full h-full" imgSrc={props.images[currentImageIndex]} />
+          <Image className="w-full h-full" imgSrc={item.images[currentImageIndex]} />
         </div> */}
         <div className="absolute top-6 left-8">
-          {props.badge && <Badge text="New" />}
+          {item.badge && <Badge text="New" />}
         </div>
         <div className="absolute top-6 right-8">
           {/* Add navigation arrows */}
@@ -72,13 +74,13 @@ const Product = (props) => {
               onClick={() =>
                 dispatch(
                   addToCart({
-                    _id: props._id,
-                    name: props.productName,
+                    _id: item._id,
+                    name: item.productName,
                     quantity: 1,
-                    image: props.img,
-                    badge: props.badge,
-                    price: props.price,
-                    colors: props.color,
+                    image: item.img,
+                    badge: item.badge,
+                    price: item.price,
+                    colors: item.color,
                   })
                 )
               }
@@ -110,12 +112,12 @@ const Product = (props) => {
       <div className="max-w-80 py-6 flex flex-col gap-1 border-[1px] border-t-0 px-4">
         <div className="flex items-center justify-between font-titleFont">
           <h2 className="text-lg text-primeColor font-bold">
-            {props.productName}
+            {item.productName}
           </h2>
-          <p className="text-[#767676] text-[14px]">${props.price}</p>
+          <p className="text-[#767676] text-[14px]">${item.price}</p>
         </div>
         <div>
-          <p className="text-[#767676] text-[14px]">{props.color}</p>
+          <p className="text-[#767676] text-[14px]">{item.color}</p>
         </div>
       </div>
     </div>

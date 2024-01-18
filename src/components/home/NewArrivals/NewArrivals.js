@@ -51,7 +51,7 @@ const NewArrivals = () => {
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
         <div className="px-2">
-          <Product
+          {/* <Product
             _id="100001"
             img={newArrOne}
             productName="Round Table Clock"
@@ -103,7 +103,7 @@ const NewArrivals = () => {
             color="Mixed"
             badge={false}
             des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
+          /> */}
         </div>
       </Slider>
     </div>

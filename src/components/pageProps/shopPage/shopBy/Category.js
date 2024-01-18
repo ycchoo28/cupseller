@@ -17,15 +17,15 @@ const Category = () => {
       title: "All Products",
     },
     {
-      _id: 991,
+      _id: 992,
       title: "Cup",
     },
     {
-      _id: 991,
+      _id: 993,
       title: "Jumping egg",
     },
     {
-      _id: 991,
+      _id: 994,
       title: "Lube",
     },
     // {
