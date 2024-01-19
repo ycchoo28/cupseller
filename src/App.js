@@ -23,6 +23,7 @@ import Payment from "./pages/payment/Payment";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
 import { useCart } from "./zustand/cart";
+import ProductForm from "./pages/Admin/ProductForm";
 
 // Initialize the cart when your application starts
 useCart.getState().initializeCart();
@@ -55,6 +56,8 @@ const router = createBrowserRouter(
         <Route path="/product/:_id" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/paymentgateway" element={<Payment />}></Route>
+        {/* ==================== Admin pages below ===================== */}
+        <Route path="/add_product" element={<ProductForm />}></Route>
       </Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/signin" element={<SignIn />}></Route>
