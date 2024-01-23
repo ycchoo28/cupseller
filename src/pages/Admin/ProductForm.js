@@ -13,13 +13,13 @@ const ProductForm = () => {
   });
 
   useEffect(() => {
-    console.log('current product', productData);
+    console.log("current product", productData);
   }, [productData]);
 
   const handleAddVariety = () => {
     setProductData({
       ...productData,
-      variety: [...productData.variety, ''], // Add a new empty string for a new variety input
+      variety: [...productData.variety, ""], // Add a new empty string for a new variety input
     });
   };
 
@@ -43,7 +43,7 @@ const ProductForm = () => {
       variety: updatedVarieties,
     });
   };
-  
+
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -66,11 +66,40 @@ const ProductForm = () => {
   };
 
   const [imageFiles, setImageFiles] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  useEffect(() => {
+    console.log("current imageFiles", imageFiles);
+  }, [imageFiles]);
 
   const handleImageChange = (e) => {
     const files = e.target.files;
     setImageFiles(files);
+
+    // Create URLs for the uploaded images
+    const imageUrls = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    setUploadedImages(imageUrls);
   };
+
+  const handleDeleteImage = (index) => {
+    const updatedImages = [...uploadedImages];
+    updatedImages.splice(index, 1);
+    setUploadedImages(updatedImages);
+
+    const updatedFiles = Array.from(imageFiles).filter(
+      (file, i) => i !== index
+    );
+    setImageFiles(updatedFiles);
+  };
+
+  useEffect(() => {
+    // Cleanup created URLs when component unmounts
+    return () => {
+      uploadedImages.forEach(URL.revokeObjectURL);
+    };
+  }, [uploadedImages]);
 
   return (
     <form
@@ -114,6 +143,35 @@ const ProductForm = () => {
         style={{ marginLeft: "10px", marginBottom: "10px" }}
       />
 
+      {uploadedImages.length > 0 && (
+        <div>
+          <p>Uploaded Images:</p>
+          {uploadedImages.map((imageUrl, index) => (
+            <div key={index} style={{ marginBottom: "10px" }}>
+              <img
+                src={imageUrl}
+                alt={`Uploaded ${index + 1}`}
+                style={{
+                  maxWidth: "100px",
+                  maxHeight: "100px",
+                  marginRight: "10px",
+                }}
+              />
+              <button type="button" onClick={() => handleDeleteImage(index)} style={{
+                  backgroundColor: "#f44336",
+                  color: "white",
+                  border: "none",
+                  padding: "5px 12px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}>
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       <label style={{ display: "block", marginBottom: "10px" }}>
         Product Name:
       </label>
@@ -143,21 +201,19 @@ const ProductForm = () => {
       />
 
       {/* doesnt work yet, planning to have + button for adding variety. */}
-      <label style={{ display: 'block', marginBottom: '10px' }}>
-        Variety:
-      </label>
+      <label style={{ display: "block", marginBottom: "10px" }}>Variety:</label>
       {productData.variety.map((variety, index) => (
-        <div key={index} style={{ marginBottom: '10px' }}>
+        <div key={index} style={{ marginBottom: "10px" }}>
           <input
             type="text"
             name={`variety-${index}`}
             value={variety}
             onChange={(e) => handleVarietyChange(e, index)}
             style={{
-              border: '1px solid black',
-              padding: '8px',
-              borderRadius: '5px',
-              marginRight: '5px',
+              border: "1px solid black",
+              padding: "8px",
+              borderRadius: "5px",
+              marginRight: "5px",
             }}
           />
           {index > 0 && (

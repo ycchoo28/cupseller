@@ -92,7 +92,7 @@ export const paginationItems = [
     sku: "xintuhuizhang",
     category: "Cup",
     img: paria,
-    images: [paria, paria, paria],
+    images: [paria, spfTwo, spfThree],
     productName: "【性徒會長雙穴入魂組】陰道後庭一次滿足｜飛機杯自慰器",
     price: "129.00",
     color: "Blank and White",
