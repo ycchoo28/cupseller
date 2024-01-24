@@ -10,12 +10,12 @@ export const useProduct = create((set, get) => ({
       console.log("setcategory error", error);
     }
   },
-  // coffeeList: [],
-  // setCoffeeList: coffeeList => {
-  // 	try {
-  // 		set(() => ({ coffeeList }));
-  // 	} catch (error) {
-  // 		console.log('setCoffeeList error', error);
-  // 	}
-  // },
+  products: [],
+  setProducts: products => {
+  	try {
+  		set(() => ({ products: products }));
+  	} catch (error) {
+  		console.log('setProducts error', error);
+  	}
+  },
 }));

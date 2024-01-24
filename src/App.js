@@ -24,6 +24,9 @@ import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
 import { useCart } from "./zustand/cart";
 import ProductForm from "./pages/Admin/ProductForm";
+import { getAllProducts } from "./service/firebase";
+import { useEffect } from "react";
+import { useProduct } from "./zustand/product";
 
 // Initialize the cart when your application starts
 useCart.getState().initializeCart();
@@ -66,11 +69,33 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  const products = useProduct((state) => state.products);
+  useEffect(() => {
+    console.log("products", products);
+  }, [products]);
+
   return (
     <div className="font-bodyFont">
-      <RouterProvider router={router} />
+      <SetupZustand>
+        <RouterProvider router={router} />
+      </SetupZustand>
     </div>
   );
 }
+
+const SetupZustand = (props) => {
+  const { children } = props;
+  const setProducts = useProduct((state) => state.setProducts);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const products = await getAllProducts();
+      setProducts(products);
+    };
+    getProducts();
+  }, []);
+
+  return children;
+};
 
 export default App;
