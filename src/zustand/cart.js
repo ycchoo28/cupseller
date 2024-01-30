@@ -68,9 +68,9 @@ export const useCart = create((set, get) => ({
     localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));
   },
 
-  deleteItem: (productId) => {
+  deleteItem: (sku) => {
     set((state) => ({
-      shoppingCart: state.shoppingCart.filter((item) => item._id !== productId),
+      shoppingCart: state.shoppingCart.filter((item) => item.sku !== sku),
     }));
 
     localStorage.setItem("shoppingCart", JSON.stringify(get().shoppingCart));

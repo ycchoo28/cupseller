@@ -32,8 +32,7 @@ const ProductInfo = ({ productInfo }) => {
       quantity: quantity, // Add the quantity separately
       selectedVariety: selectedVariety,
     };
-    console.log("producttytyt", product);
-    // addToCart(product);
+    addToCart(product);
   };
 
   console.log("palapapapa", productInfo);

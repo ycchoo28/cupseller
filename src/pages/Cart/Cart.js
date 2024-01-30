@@ -46,10 +46,20 @@ const Cart = () => {
       {shoppingCart.length > 0 ? (
         <div className="pb-20">
           <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-5 place-content-center px-6 text-lg font-titleFont font-semibold">
-            <h2 className="col-span-2">Product</h2>
-            <h2>Price</h2>
-            <h2>Quantity</h2>
-            <h2>Sub Total</h2>
+            <div className="flex col-span-2 items-center gap-4 ml-4">
+              <h2 className="col-span-2">Product</h2>
+            </div>
+            <div className="col-span-5 mdl:col-span-3 flex items-center justify-between py-4 mdl:py-0 px-0 mdl:px-0 gap-0">
+              <div className="flex w-1/3 items-center text-lg font-semibold pr-4">
+                Variety
+              </div>
+              <div className="flex w-1/3 items-center text-lg font-semibold">
+                Quantity
+              </div>
+              <div className="flex w-1/3 items-center text-lg font-semibold">
+                Sub Total
+              </div>
+            </div>
           </div>
           <div className="mt-5">
             {shoppingCart.map((item) => (
@@ -103,9 +113,12 @@ const Cart = () => {
                 </p>
               </div>
               <div className="flex justify-end">
-                  <button onClick={handleSendToWhatsApp} className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300">
-                    Proceed to Checkout
-                  </button>
+                <button
+                  onClick={handleSendToWhatsApp}
+                  className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300"
+                >
+                  Proceed to Checkout
+                </button>
               </div>
             </div>
           </div>
